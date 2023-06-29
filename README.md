@@ -1,2 +1,2 @@
 # FCLoanCalculatorApp
- Learnig
+ Learning ASP .NET
