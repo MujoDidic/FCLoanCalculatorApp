@@ -1,17 +1,12 @@
 ﻿using FCLoanCalculator.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace FCLoanCalculator.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
 
         public IActionResult Index()
         {
@@ -21,14 +16,15 @@ namespace FCLoanCalculator.Controllers
         [HttpGet]
         public IActionResult App()
         {
-            Loan loan = new();
-
-            loan.Payment = 0.0m;
-            loan.TotalInterst = 0.0m;
-            loan.TotalCost = 0.0m;
-            loan.Rate = 3.5m;
-            loan.Amount = 15000m;
-            loan.Term = 60;
+            Loan loan = new()
+            {
+                Payment = 0.0m,
+                TotalInterst = 0.0m,
+                TotalCost = 0.0m,
+                Rate = 3.5m,
+                Amount = 15000m,
+                Term = 60
+            };
 
             return View(loan);
         }
