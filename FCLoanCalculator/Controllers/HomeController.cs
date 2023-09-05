@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Globalization;
+using FCLoanCalculator.Helpers;
 
 namespace FCLoanCalculator.Controllers
 {
@@ -19,7 +20,7 @@ namespace FCLoanCalculator.Controllers
             Loan loan = new()
             {
                 Payment = 0.0m,
-                TotalInterst = 0.0m,
+                TotalInterest = 0.0m,
                 TotalCost = 0.0m,
                 Rate = 3.5m,
                 Amount = 15000m,
@@ -27,6 +28,19 @@ namespace FCLoanCalculator.Controllers
             };
 
             return View(loan);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult App(Loan loan)
+        {
+            //Calculate loan
+            var loanHelper = new LoanHelper();
+
+            Loan newLoan = loanHelper.GetPayments(loan);
+            
+            
+            return View(newLoan);
         }
 
         public IActionResult Privacy()
